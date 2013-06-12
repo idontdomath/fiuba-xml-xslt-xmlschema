@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <xs:complexType name="bodyType">
+    <xs:sequence>
+      <xs:element name="p" type="xs:string" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="noteType">
+    <xs:sequence> <!-- all, choice -->
+      <xs:element name="to" type="xs:string"/>
+      <xs:element name="from" type="xs:string"/>
+      <xs:element name="heading" type="xs:string"/>
+      <xs:element name="body" type="bodyType"/>
+    </xs:sequence>
+    <!-- declaracion de atributos siempre viene al final y aplica al tipo al que estamos definiendo -->
+    <xs:attribute name="lang" type="xs:string" use="optional" /> <!-- required o optional -->
+  </xs:complexType>
+
+<xs:element name="note" type="noteType"/>
+
+</xs:schema>

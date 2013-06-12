@@ -1,0 +1,78 @@
+<!--
+Escribir un XMLSchema que nos guardar en un xml la informacion de libros y revistas de una biblioteca que posee 4 muebles con 5 estantes cada una.
+-->
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<!--ubicacion -->
+
+	  <xs:complexType name="ubicacion">
+	    <xs:attribute name="id" type="xs:integer" use="required" />
+
+	    <xs:attribute name="mueble" use="required">
+			<xs:simpleType>
+		  		<xs:restriction base="xs:integer">
+		    		<xs:minInclusive value="1"/>
+		    		<xs:maxInclusive value="4"/>
+		  		</xs:restriction>
+			</xs:simpleType>
+	    </xs:attribute>
+
+	    <xs:attribute name="estante" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:integer">
+					<xs:minInclusive value="1"/>
+					<xs:maxInclusive value="5"/>
+				</xs:restriction>
+			</xs:simpleType>
+	    </xs:attribute>
+	    
+	  </xs:complexType>
+
+	<!-- coleccion de ubicaciones -->
+	<xs:complexType name="coleccionUbicaciones">
+		<xs:sequence>
+			<xs:element name="ubicacion" type="ubicacion" minOccurs="0" maxOccurs="2500"/>
+			<!-- ver como no poner un limite superior -->
+		</xs:sequence>
+	</xs:complexType>	
+
+	<!-- publicacion -->
+	<xs:complexType name="publicacion">
+		<xs:sequence>
+			<xs:element name="titulo" type="xs:string"/>
+		</xs:sequence>
+	    <xs:attribute name="id" type="xs:integer" use="required" />
+	</xs:complexType>
+
+	<!-- libro -->
+	<!-- derivacion de publicacion -->
+	<xs:complexType name="libro">
+		<xs:complexContent>
+	    	<xs:extension base="publicacion">
+	    		<xs:sequence>
+					<xs:element name="autor" type="xs:string"/>
+					<xs:element name="isbn" type="xs:string"/>
+				</xs:sequence>
+	    	</xs:extension>
+	    </xs:complexContent>
+	</xs:complexType>
+
+	<!-- coleccion de libros -->
+	<xs:complexType name="coleccionLibros">
+		<xs:sequence>
+			<xs:element name="libro" type="libro" minOccurs="0" maxOccurs="2500"/>
+			<!-- ver como no poner un limite superior -->
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="biblioteca">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="libros" type="coleccionLibros" maxOccurs="1" minOccurs="0"/>
+				<xs:element name="ubicaciones" type="coleccionUbicaciones"/>	
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

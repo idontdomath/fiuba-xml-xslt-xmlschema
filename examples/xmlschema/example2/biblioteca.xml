@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<biblioteca>
+	<libros>
+		<libro id="1">
+			<titulo>Plataforma</titulo>
+			<autor>Michel Houllebecq</autor>
+			<isbn>12312312312321</isbn>
+		</libro>
+		<libro id="2">
+			<titulo>Ampliacion del campo de batalla</titulo>
+			<autor>Michel Houllebecq</autor>
+			<isbn>12312312312323</isbn>
+		</libro>
+	</libros>
+	<ubicaciones>
+		<ubicacion id="1" mueble="2" estante="1"/>
+		<ubicacion id="1" mueble="3" estante="1"/>
+	</ubicaciones>
+</biblioteca>

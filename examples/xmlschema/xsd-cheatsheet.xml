@@ -1,0 +1,77 @@
+<cheatsheet xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<!-- ocurrencias -->
+	<xs:element name="person">
+	  <xs:complexType>
+	    <xs:sequence>
+	      <xs:element name="full_name" type="xs:string"/>
+	      <xs:element name="child_name" type="xs:string"
+	      maxOccurs="10" minOccurs="0"/>
+	    </xs:sequence>
+	  </xs:complexType>
+	</xs:element>
+
+	<!-- derivacion por extension -->
+	<xs:complexType name="personinfo">
+	  <xs:sequence>
+	    <xs:element name="firstname" type="xs:string"/>
+	    <xs:element name="lastname" type="xs:string"/>
+	  </xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="fullpersoninfo">
+	  <xs:complexContent>
+	    <xs:extension base="personinfo">
+	      <xs:sequence>
+	        <xs:element name="address" type="xs:string"/>
+	        <xs:element name="city" type="xs:string"/>
+	        <xs:element name="country" type="xs:string"/>
+	      </xs:sequence>
+	    </xs:extension>
+	  </xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="employee" type="fullpersoninfo"/>
+
+	<!-- restricciones -->
+	<!-- por valor -->
+	<xs:element name="age">
+	<xs:simpleType>
+	  <xs:restriction base="xs:integer">
+	    <xs:minInclusive value="0"/>
+	    <xs:maxInclusive value="100"/>
+	  </xs:restriction>
+	</xs:simpleType>
+	</xs:element>
+
+	<!-- por un conjunto de valores -->
+	<xs:element name="car">
+	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="Audi"/>
+	    <xs:enumeration value="Golf"/>
+	    <xs:enumeration value="BMW"/>
+	  </xs:restriction>
+	</xs:simpleType>
+	</xs:element>
+
+	<!-- por patrones -->
+	<!-- usando regexp -->
+	<xs:element name="letter">
+	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+	    <xs:pattern value="[a-z]"/>
+	  </xs:restriction>
+	</xs:simpleType>
+	</xs:element>
+
+	<!-- usando opciones -->
+	<xs:element name="gender">
+	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+	    <xs:pattern value="male|female"/>
+	  </xs:restriction>
+	</xs:simpleType>
+	</xs:element>
+
+</cheatsheet>
